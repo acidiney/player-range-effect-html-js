@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .line {
+            width: 100vw;
+            height: 50px;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+            cursor: pointer;
+
+        }
+
+        .redLine {
+            background: red;
+            height: 2px;
+            position: absolute;
+            bottom: 0;
+            width: 20vw;
+            cursor: pointer;
+        }
+
+        .point {
+            cursor: pointer;
+            height: 7px;
+            width: 7px;
+            border-radius: 50%;
+            background: red;
+            position: absolute;
+            top: -2px;
+            left: 20vw;
+        }
+        h2{
+            text-align: center;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2> Linha de tempo para players </h2>
+    <div class="line" onclick="choosePosition(event)">
+        <div class="redLine">
+            <div class="point" draggable="true" ondrag="choosePosition(event)"></div>
+        </div>
+    </div>
+    <script>
+        function choosePosition(ev) {
+            if (ev.clientX > 0) {
+               
+                if(ev.dataTransfer) {
+                    ev.dataTransfer.setData("text", ev.target.id);
+                }
+
+                document.querySelector('.redLine').style.width = ev.clientX + 'px';
+                document.querySelector('.point').style.left = ev.clientX + 'px';
+            }
+        }
+    </script>
+</body>
+
+</html>
